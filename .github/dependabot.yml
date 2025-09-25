@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"  # "/" si Laravel est à la racine, sinon "/backend" ou "/backend/Laravel"
+    schedule:
+      interval: "daily"  # Dependabot vérifiera tous les jours les mises à jour
