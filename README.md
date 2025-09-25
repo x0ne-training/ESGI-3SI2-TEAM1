@@ -22,6 +22,7 @@ Bah y'a rien a résumer
 - FAYE Amadou : Développeur
 - FLORY Ewan : Testeur
 - FRON Rafaël : Tech Leader
+- MBAYE Ibrahima : Testeur
 - SAVIC César : Développeur
 - SILVA-RAOULT Loïc : Testeur/Développeur
 
