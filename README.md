@@ -25,6 +25,7 @@ Bah y'a rien a résumer
 - MBAYE Ibrahima : Testeur
 - SAVIC César : Développeur
 - SILVA-RAOULT Loïc : Testeur/Développeur
+- BALICA Nicu : Développeur
 
 --- 
 *© Tous droits réservés - 3SI2 promo 2025/2026*
