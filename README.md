@@ -15,13 +15,15 @@ Bah y'a rien a résumer
 - ABDELRAHMAN Noureldin : DevOps
 - ALBALOUH Jean : Maintain / Triage
 - ATTIA David : Testeur
+- BALICA Nicu : Développeur
 - BELHASSEN Dan : Testeur
 - EL BOUKAILI Youssef : Testeur
 - EL ATTAR Ahmed : GOAT / Leader
 - FAGNOT Nicolas : Développeur
 - FAYE Amadou : Développeur
-- FLORY Ewan : Testeur
+- FLORY Ewan : DevOps
 - FRON Rafaël : Tech Leader
+- MBAYE Ibrahima : Testeur
 - SAVIC César : Développeur
 - SILVA-RAOULT Loïc : Testeur/Développeur
 
