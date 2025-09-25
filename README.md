@@ -15,6 +15,7 @@ Bah y'a rien a résumer
 - ABDELRAHMAN Noureldin : DevOps
 - ALBALOUH Jean : Maintain / Triage
 - ATTIA David : Testeur
+- BALICA Nicu : Développeur
 - BELHASSEN Dan : Testeur
 - EL BOUKAILI Youssef : Testeur
 - EL ATTAR Ahmed : GOAT / Leader
