@@ -20,7 +20,7 @@ Bah y'a rien a résumer
 - EL ATTAR Ahmed : GOAT / Leader
 - FAGNOT Nicolas : Développeur
 - FAYE Amadou : Développeur
-- FLORY Ewan : Testeur
+- FLORY Ewan : DevOps
 - FRON Rafaël : Tech Leader
 - MBAYE Ibrahima : Testeur
 - SAVIC César : Développeur
