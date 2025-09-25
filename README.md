@@ -5,3 +5,4 @@ NOM : FAYE Prenom : Amadou
 César Savic : Développeur
 Nicolas Fagnot : Développeur
 Abdelrahman Noureldin Devops
+Dan Belhassen : QA/Testeur
