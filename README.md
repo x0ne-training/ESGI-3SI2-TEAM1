@@ -29,4 +29,3 @@ Bah y'a rien a résumer
 
 --- 
 *© Tous droits réservés - 3SI2 promo 2025/2026*
-
