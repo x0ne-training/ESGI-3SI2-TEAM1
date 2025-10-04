@@ -5,7 +5,7 @@
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1.0" />
-		<title>Portail Étudiant - Style Liquid Glass</title>
+		<title>Portail Étudiant </title>
 		<script src="https://cdn.tailwindcss.com"></script>
 		<style>
 			/* Définir les couleurs personnalisées */
@@ -150,7 +150,7 @@
 					82,
 					5,
 					123,
-					0.2
+					0.1
 				); /* Violet foncé semi-transparent */
 				backdrop-filter: blur(12px);
 				-webkit-backdrop-filter: blur(12px);
@@ -165,17 +165,14 @@
 		<nav class="nav-glass p-6 shadow-2xl sticky top-0 z-50">
 			<div
 				class="container mx-auto flex justify-between items-center">
-				<!-- Logo et titre avec effet de verre -->
+				<!-- Logo et titre -->
 				<div class="flex items-center space-x-4">
-					<div
-						class="glass-effect p-3 rounded-full">
-						<svg
-							class="w-8 h-8 text-[var(--violet-clair)]"
-							fill="currentColor"
-							viewBox="0 0 20 20">
-							<path
-								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-						</svg>
+					<div class="p-2">
+						<img 
+							src="{{ asset('logo.png') }}" 
+							alt="Logo 3SIB" 
+							class="w-16 h-16 object-contain"
+						/>
 					</div>
 					<h1
 						class="text-4xl font-extrabold text-[var(--blanc-casse)] tracking-tight bg-gradient-to-r from-[var(--violet-clair)] to-[var(--violet-vif)] bg-clip-text text-transparent">
