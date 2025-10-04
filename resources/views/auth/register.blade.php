@@ -94,7 +94,7 @@
                            name="email" 
                            value="{{ old('email') }}"
                            class="w-full px-4 py-3 bg-white/10 border border-custom-purple-light/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-custom-purple-light focus:border-transparent transition-all duration-300"
-                           placeholder="jean.dupont@email.com"
+                           placeholder="p.nom@myskolae.fr
                            required>
                     @error('email')
                         <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
