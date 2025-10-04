@@ -16,7 +16,7 @@
                         'custom-purple-light': '#BC6FF1',
                     },
                     backgroundImage: {
-                        'gradient-custom': 'linear-gradient(135deg, #000000 0%, #52057B 50%, #892CDC 100%)',
+                        'gradient-custom': 'linear-gradient(135deg, #0a0a0a 0%,rgb(8, 6, 8) 30%,rgb(15, 3, 15) 70%, #000000 100%)',
                         'gradient-logo': 'linear-gradient(45deg, #BC6FF1, #892CDC)',
                         'gradient-button': 'linear-gradient(45deg, #BC6FF1, #892CDC)',
                     }
@@ -31,12 +31,122 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
         .glass-effect {
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(188, 111, 241, 0.1) 0%, 
+                rgba(137, 44, 220, 0.1) 50%, 
+                rgba(82, 5, 123, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .glass-effect:hover::before {
+            opacity: 1;
+        }
+        
+        .liquid-glass {
+            backdrop-filter: blur(25px) saturate(180%);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-orb {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(188, 111, 241, 0.15) 0%, 
+                rgba(137, 44, 220, 0.1) 50%, 
+                rgba(82, 5, 123, 0.05) 100%);
+            filter: blur(40px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .gradient-orb-2 {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(137, 44, 220, 0.2) 0%, 
+                rgba(188, 111, 241, 0.1) 50%, 
+                rgba(82, 5, 123, 0.05) 100%);
+            filter: blur(30px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .pulse-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 8px 32px rgba(0, 0, 0, 0.1),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 8px 32px rgba(188, 111, 241, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                    0 0 20px rgba(188, 111, 241, 0.3);
+            }
+        }
+        
+        .glass-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .glass-shimmer:hover::after {
+            left: 100%;
         }
     </style>
 </head>
 <body class="bg-gradient-custom min-h-screen text-white font-sans">
+    <!-- Orbes de dégradé animés -->
+    <div class="gradient-orb" id="gradient-orb-1"></div>
+    <div class="gradient-orb-2" id="gradient-orb-2"></div>
+    
     <div class="max-w-6xl mx-auto px-5 py-8">
         <!-- Header avec navigation -->
         <header class="flex justify-between items-center mb-10">
@@ -60,7 +170,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Informations personnelles -->
             <div class="lg:col-span-2">
-                <div class="bg-white/10 glass-effect rounded-3xl p-8 border border-custom-purple-light/30 shadow-2xl mb-8">
+                <div class="liquid-glass glass-shimmer pulse-glow rounded-3xl p-8 shadow-2xl mb-8">
                     <h2 class="text-2xl font-bold text-custom-purple-light mb-6 flex items-center gap-3">
                         <span class="text-3xl">👤</span>
                         Informations personnelles
@@ -128,15 +238,36 @@
                             @enderror
                         </div>
 
-                        <button type="submit" 
-                                class="bg-gradient-button text-white py-3 px-6 rounded-xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-custom-purple-light/40 focus:outline-none focus:ring-2 focus:ring-custom-purple-light">
-                            💾 Sauvegarder les modifications
-                        </button>
+                         <div class="flex justify-center">
+                             <div class="relative group">
+                                 <div
+                                     class="relative w-80 h-16 opacity-90 overflow-hidden rounded-xl bg-custom-purple-dark z-10"
+                                 >
+                                     <div
+                                         class="absolute z-10 -translate-x-44 group-hover:translate-x-[30rem] ease-in transistion-all duration-700 h-full w-44 bg-gradient-to-r from-custom-purple-light to-custom-purple opacity-30 -skew-x-12"
+                                     ></div>
+                                 
+                                     <div
+                                         class="absolute flex items-center justify-center text-white z-[1] opacity-90 rounded-2xl inset-0.5 bg-custom-purple-dark"
+                                     >
+                                         <button
+                                             type="submit"
+                                             class="input font-semibold text-xl h-full opacity-90 w-full px-16 py-3 rounded-xl bg-custom-purple-dark"
+                                         >
+                                             Sauvegarder
+                                         </button>
+                                     </div>
+                                     <div
+                                         class="absolute duration-1000 group-hover:animate-spin w-full h-[100px] bg-gradient-to-r from-custom-purple-light to-custom-purple blur-[30px]"
+                                     ></div>
+                                 </div>
+                             </div>
+                         </div>
                     </form>
                 </div>
 
                 <!-- Changement de mot de passe -->
-                <div class="bg-white/10 glass-effect rounded-3xl p-8 border border-custom-purple-light/30 shadow-2xl">
+                <div class="liquid-glass glass-shimmer pulse-glow rounded-3xl p-8 shadow-2xl">
                     <h2 class="text-2xl font-bold text-custom-purple-light mb-6 flex items-center gap-3">
                         <span class="text-3xl">🔒</span>
                         Changer le mot de passe
@@ -188,10 +319,31 @@
                                    required>
                         </div>
 
-                        <button type="submit" 
-                                class="bg-gradient-button text-white py-3 px-6 rounded-xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-custom-purple-light/40 focus:outline-none focus:ring-2 focus:ring-custom-purple-light">
-                            🔄 Mettre à jour le mot de passe
-                        </button>
+                         <div class="flex justify-center">
+                             <div class="relative group">
+                                 <div
+                                     class="relative w-80 h-16 opacity-90 overflow-hidden rounded-xl bg-custom-purple-dark z-10"
+                                 >
+                                     <div
+                                         class="absolute z-10 -translate-x-44 group-hover:translate-x-[30rem] ease-in transistion-all duration-700 h-full w-44 bg-gradient-to-r from-custom-purple-light to-custom-purple opacity-30 -skew-x-12"
+                                     ></div>
+                                 
+                                     <div
+                                         class="absolute flex items-center justify-center text-white z-[1] opacity-90 rounded-2xl inset-0.5 bg-custom-purple-dark"
+                                     >
+                                         <button
+                                             type="submit"
+                                             class="input font-semibold text-xl h-full opacity-90 w-full px-16 py-3 rounded-xl bg-custom-purple-dark"
+                                         >
+                                             Mettre à jour
+                                         </button>
+                                     </div>
+                                     <div
+                                         class="absolute duration-1000 group-hover:animate-spin w-full h-[100px] bg-gradient-to-r from-custom-purple-light to-custom-purple blur-[30px]"
+                                     ></div>
+                                 </div>
+                             </div>
+                         </div>
                     </form>
                 </div>
             </div>
@@ -199,7 +351,7 @@
             <!-- Sidebar avec informations -->
             <div class="space-y-8">
                 <!-- Avatar et informations de base -->
-                <div class="bg-white/10 glass-effect rounded-3xl p-6 border border-custom-purple-light/30 shadow-2xl">
+                <div class="liquid-glass glass-shimmer pulse-glow rounded-3xl p-6 shadow-2xl">
                     <div class="text-center">
                         <div class="w-24 h-24 bg-gradient-button rounded-full mx-auto mb-4 flex items-center justify-center text-3xl">
                             {{ strtoupper(substr($user->first_name ?? 'U', 0, 1)) }}{{ strtoupper(substr($user->last_name ?? 'S', 0, 1)) }}
@@ -213,7 +365,7 @@
                 </div>
 
                 <!-- Statistiques -->
-                <div class="bg-white/10 glass-effect rounded-3xl p-6 border border-custom-purple-light/30 shadow-2xl">
+                <div class="liquid-glass glass-shimmer pulse-glow rounded-3xl p-6 shadow-2xl">
                     <h3 class="text-lg font-bold text-custom-purple-light mb-4 flex items-center gap-2">
                         <span class="text-xl">📊</span>
                         Statistiques
@@ -235,7 +387,7 @@
                 </div>
 
                 <!-- Actions rapides -->
-                <div class="bg-white/10 glass-effect rounded-3xl p-6 border border-custom-purple-light/30 shadow-2xl">
+                <div class="liquid-glass glass-shimmer pulse-glow rounded-3xl p-6 shadow-2xl">
                     <h3 class="text-lg font-bold text-custom-purple-light mb-4 flex items-center gap-2">
                         <span class="text-xl">⚡</span>
                         Actions rapides
@@ -259,7 +411,7 @@
     <script>
         // Animation d'entrée
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('[class*="glass-effect"]');
+            const cards = document.querySelectorAll('.liquid-glass');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
@@ -268,6 +420,71 @@
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, index * 200);
+            });
+            
+            // Animation des orbes de dégradé qui suivent la souris
+            const orb1 = document.getElementById('gradient-orb-1');
+            const orb2 = document.getElementById('gradient-orb-2');
+            
+            // Position initiale des orbes
+            orb1.style.left = '20%';
+            orb1.style.top = '30%';
+            orb2.style.right = '20%';
+            orb2.style.bottom = '30%';
+            
+            let mouseX = 0;
+            let mouseY = 0;
+            let orb1X = 0;
+            let orb1Y = 0;
+            let orb2X = 0;
+            let orb2Y = 0;
+            
+            // Suivi de la souris
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            // Animation fluide des orbes
+            function animateOrbs() {
+                // Orbe 1 suit la souris avec un décalage
+                orb1X += (mouseX * 0.3 - orb1X) * 0.05;
+                orb1Y += (mouseY * 0.3 - orb1Y) * 0.05;
+                
+                // Orbe 2 suit la souris avec un décalage inverse
+                orb2X += ((window.innerWidth - mouseX) * 0.2 - orb2X) * 0.03;
+                orb2Y += ((window.innerHeight - mouseY) * 0.2 - orb2Y) * 0.03;
+                
+                orb1.style.left = orb1X + 'px';
+                orb1.style.top = orb1Y + 'px';
+                orb2.style.left = orb2X + 'px';
+                orb2.style.top = orb2Y + 'px';
+                
+                requestAnimationFrame(animateOrbs);
+            }
+            
+            animateOrbs();
+            
+            // Effet de parallaxe seulement sur les cartes de la sidebar (pas les formulaires)
+            const sidebarCards = document.querySelectorAll('.space-y-8 .liquid-glass');
+            sidebarCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                });
             });
         });
     </script>
