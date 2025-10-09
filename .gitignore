@@ -73,7 +73,6 @@ coverage/
 
 # Environment / Secrets
 .env
-.env.*
 *.key
 *.pem
 *.log
