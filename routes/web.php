@@ -6,8 +6,8 @@ use App\Http\Controllers\ProfileController;
 
 // Page d'accueil
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+    return view('app');
+})->name('app');
 
 // Routes d'authentification
 Route::middleware('guest')->group(function () {
