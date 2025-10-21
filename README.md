@@ -25,7 +25,7 @@ Bah y'a rien a résumer
 - FRON Rafaël : Tech Leader
 - MBAYE Ibrahima : Testeur
 - SAVIC César : Développeur
-- SILVA-RAOULT Loïc : Testeur/Développeur
+- SILVA-RAOULT Loïc : Leader
 
 --- 
 *© Tous droits réservés - 3SI2 promo 2025/2026*
