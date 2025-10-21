@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emploi du temps — 3SIB Cybersécurité</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root{
+        --violet-fonce:#52057b; --violet-vif:#892cdc; --violet-clair:#bc6ff1; --noir:#0b0b0b; --gris:#e5e7eb; --slot: 20px;
+      }
+      .glass{ background: rgba(255,255,255,.08); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.16); box-shadow: 0 4px 16px rgba(0,0,0,.35);} 
+      .slots { display:grid; grid-template-rows: repeat(40, var(--slot)); }
+      .day-col { position: relative; }
+      .event { position:absolute; left: .25rem; right: .25rem; border-radius:.75rem; padding:.5rem .6rem; color:white; box-shadow:0 6px 16px rgba(0,0,0,.35); }
+      .stripe::before{ content:""; position:absolute; inset:0; background: repeating-linear-gradient(135deg, rgba(255,255,255,.08) 0 8px, transparent 8px 16px); border-radius:inherit; pointer-events:none; }
+      .now-line { position:absolute; left:0; right:0; height:2px; background:#ef4444; box-shadow:0 0 0 2px rgba(239,68,68,.2);} 
+      .time-col .tick { height: var(--slot); border-top: 1px dashed rgba(255,255,255,.06);} 
+    </style>
+  </head>
+  <body class="bg-[var(--noir)] text-white min-h-screen">
+    <header class="sticky top-0 z-40 border-b border-white/10 bg-[var(--violet-fonce)]/20 backdrop-blur-xl">
+      <div class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3">
+        <h1 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[var(--violet-clair)] to-[var(--violet-vif)] bg-clip-text text-transparent">Emploi du temps — 3SIB (Bachelor Cybersécurité)</h1>
+        <div class="flex items-center gap-2">
+          <button id="prevWeek" class="glass px-3 py-2 rounded-lg">⟵ Semaine -1</button>
+          <button id="todayBtn" class="glass px-3 py-2 rounded-lg">Aujourd'hui</button>
+          <button id="nextWeek" class="glass px-3 py-2 rounded-lg">Semaine +1 ⟶</button>
+          <input id="weekPicker" type="week" class="glass px-3 py-2 rounded-lg bg-white/5 border border-white/10" />
+          <button id="exportIcs" class="glass px-3 py-2 rounded-lg">Exporter .ics</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 lg:px-10 py-6 space-y-6">
+      <!-- Légende -->
+      <section class="flex flex-wrap gap-3 items-center text-sm">
+        <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-blue-500"></span>Langage C & Prog</span>
+        <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-red-500"></span>Sécurité Wifi</span>
+        <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-emerald-500"></span>Cryptographie</span>
+        <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-yellow-500"></span>Anglais</span>
+        <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-violet-500"></span>Panorama IA & Sécu</span>
+        <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-gray-500"></span>Linux Admin Avancée</span>
+        <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-green-500"></span>Scripting Python Sécu</span>
+        <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-pink-500"></span>Outils Dev & Protection</span>
+      </section>
+
+      <!-- Grille -->
+      <section class="glass rounded-2xl p-4 md:p-5">
+        <div id="timetableGrid" class="grid" style="grid-template-columns: 80px repeat(5, 1fr);">
+          <!-- Colonne heures -->
+          <div class="bg-white/5 rounded-l-xl">
+            <div class="h-8"></div>
+            <div class="time-col slots"></div>
+          </div>
+          <template id="day-template">
+            <div class="day-col border-l border-white/10">
+              <div class="h-8 flex items-center justify-center text-sm text-gray-300 bg-white/5 sticky top-[64px] z-10"></div>
+              <div class="relative" style="height: calc(var(--slot) * 40)"></div>
+            </div>
+          </template>
+        </div>
+        <!-- safelist couleurs dynamiques pour Tailwind CDN -->
+        <div class="hidden bg-blue-500 bg-red-500 bg-emerald-500 bg-yellow-500 bg-violet-500 bg-gray-500 bg-green-500 bg-pink-500"></div>
+      </section>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ======= Données (répétées chaque semaine) =======
+      const DATA = {
+        classes: ["3SIB"],
+        events: [
+          { id: 1, class: "3SIB", subject: "Langage C et Programmation", color: "blue-500", day: 1, start: "09:00", end: "11:00", room: "B101", teacher: "M. Diop" },
+          { id: 2, class: "3SIB", subject: "Sécurité Wifi", color: "red-500", day: 1, start: "14:00", end: "16:00", room: "C202", teacher: "Mme Diallo" },
+          { id: 3, class: "3SIB", subject: "Cryptographie", color: "emerald-500", day: 2, start: "10:00", end: "12:00", room: "A303", teacher: "M. Sow" },
+          { id: 4, class: "3SIB", subject: "Anglais", color: "yellow-500", day: 3, start: "08:30", end: "10:00", room: "B105", teacher: "Mme Smith" },
+          { id: 5, class: "3SIB", subject: "Panorama IA & Cybersécurité", color: "violet-500", day: 3, start: "13:00", end: "15:00", room: "D201", teacher: "M. Ndiaye" },
+          { id: 6, class: "3SIB", subject: "Linux Administration Avancée", color: "gray-500", day: 4, start: "09:00", end: "11:30", room: "Labo C304", teacher: "Mme Kane" },
+          { id: 7, class: "3SIB", subject: "Scripting Python Cybersécurité", color: "green-500", day: 5, start: "10:00", end: "12:00", room: "Labo A107", teacher: "M. Faye" },
+          { id: 8, class: "3SIB", subject: "Outils de Développement & Protection du Code", color: "pink-500", day: 5, start: "14:00", end: "16:00", room: "B202", teacher: "M. Gomis" }
+        ]
+      };
+
+      // ======= Constantes & helpers =======
+      const DAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"]; // 1..5
+      const START_H = 8, END_H = 18, SLOT_MIN = 15, slotsPerHour = 60 / SLOT_MIN;
+      const grid = document.getElementById('timetableGrid');
+      const dayTpl = document.getElementById('day-template');
+      const prevWeekBtn = document.getElementById('prevWeek');
+      const nextWeekBtn = document.getElementById('nextWeek');
+      const todayBtn = document.getElementById('todayBtn');
+      const weekPicker = document.getElementById('weekPicker');
+      const exportBtn = document.getElementById('exportIcs');
+
+      function timeToIndex(t){ const [h,m] = t.split(":").map(Number); return (h - START_H) * slotsPerHour + Math.floor(m / SLOT_MIN); }
+      function indexToPx(idx){ return idx * parseInt(getComputedStyle(document.documentElement).getPropertyValue('--slot')); }
+      function formatTime(t){ return t.replace(":","h"); }
+
+      // lundi d'une date donnée (ISO: lundi=0)
+      function mondayOf(d){ const x = new Date(d); const day = (x.getDay()||7)-1; x.setDate(x.getDate()-day); x.setHours(0,0,0,0); return x; }
+      function setWeekPickerFrom(date){
+        // Calcule la semaine ISO approximative pour l'input type=week
+        const d = new Date(date); d.setHours(0,0,0,0);
+        const firstThu = new Date(d.getFullYear(),0,4); // semaine 1 autour du 4 janv
+        const weekNum = Math.ceil(((d - mondayOf(firstThu)) / 86400000 + 1) / 7);
+        weekPicker.value = `${d.getFullYear()}-W${String(weekNum).padStart(2,'0')}`;
+      }
+      function mondayFromWeekInput(){
+        if(!weekPicker.value){ return mondayOf(new Date()); }
+        const [y,w] = weekPicker.value.split('-W').map(Number);
+        const jan4 = new Date(y,0,4);
+        const mon1 = mondayOf(jan4);
+        const monW = new Date(mon1); monW.setDate(mon1.getDate() + (w-1)*7);
+        return monW;
+      }
+
+      // ======= Construction de la grille (entêtes + colonne heures) =======
+      function buildGrid(weekStart){
+        grid.querySelectorAll('.day-col').forEach(n=>n.remove());
+        for(let i=0;i<5;i++){
+          const node = dayTpl.content.cloneNode(true);
+          const date = new Date(weekStart); date.setDate(weekStart.getDate()+i);
+          const dd = String(date.getDate()).padStart(2,'0'); const mm = String(date.getMonth()+1).padStart(2,'0');
+          node.querySelector('div.h-8').textContent = `${DAYS[i]} ${dd}/${mm}`;
+          grid.appendChild(node);
+        }
+        const timeCol = grid.firstElementChild?.querySelector('.time-col');
+        if(timeCol){
+          timeCol.innerHTML = '';
+          for(let i=0;i<(END_H-START_H)*slotsPerHour;i++){
+            const tick = document.createElement('div'); tick.className = 'tick flex items-center justify-end pr-2 text-xs text-gray-400';
+            const mins = (i%slotsPerHour)*SLOT_MIN; const hour = START_H + Math.floor(i/slotsPerHour);
+            if(mins===0){ tick.textContent = `${String(hour).padStart(2,'0')}:00`; tick.classList.add('text-gray-300'); }
+            timeCol.appendChild(tick);
+          }
+        }
+      }
+
+      // ======= Rendu des événements d'une semaine =======
+      function renderWeek(weekStart){
+        const containers = grid.querySelectorAll('.day-col > div.relative');
+        containers.forEach(c=>c.innerHTML='');
+
+        DATA.events.forEach(e=>{
+          const dayIdx = e.day-1; const container = containers[dayIdx]; if(!container) return;
+          const startIdx = timeToIndex(e.start); const endIdx = timeToIndex(e.end);
+          const top = indexToPx(startIdx); const height = Math.max(indexToPx(endIdx-startIdx), 22);
+          const el = document.createElement('article'); el.className = `event stripe bg-${e.color}`; el.style.top = `${top}px`; el.style.height = `${height}px`;
+          el.innerHTML = `
+            <div class='flex justify-between items-center'>
+              <strong class='truncate'>${e.subject}</strong>
+              <span class='text-xs bg-black/30 px-2 py-0.5 rounded'>${e.room}</span>
+            </div>
+            <div class='text-xs mt-1 opacity-90'>${formatTime(e.start)}–${formatTime(e.end)} • ${e.teacher}</div>`;
+          container.appendChild(el);
+        });
+
+        drawNowLineIfCurrent(weekStart);
+      }
+
+      function isSameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+      function drawNowLineIfCurrent(weekStart){
+        document.querySelectorAll('.now-line').forEach(n=>n.remove());
+        const today = new Date(); const monday = mondayOf(today);
+        if(monday.getTime() !== weekStart.getTime()) return; // n'affiche la ligne que pour la semaine courante
+        const dow = (today.getDay()||7)-1; // 0..4
+        const hour = today.getHours(); if(hour < START_H || hour > END_H) return;
+        const idx = (hour-START_H)*slotsPerHour + Math.floor(today.getMinutes()/SLOT_MIN);
+        const y = indexToPx(idx);
+        const container = grid.querySelectorAll('.day-col > div.relative')[dow];
+        if(container){ const line = document.createElement('div'); line.className='now-line'; line.style.top=`${y}px`; container.appendChild(line); }
+      }
+
+      // ======= Export ICS de la semaine affichée =======
+      function exportICS(weekStart){
+        const pad=n=>String(n).padStart(2,'0');
+        const fmtDT=(d,t)=>{ const [H,M]=t.split(':'); return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${H}${M}00`; };
+        const now=new Date();
+        const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//PortailEtudiant//3SIB//FR'];
+        DATA.events.forEach((e,i)=>{
+          const d=new Date(weekStart); d.setDate(weekStart.getDate()+ (e.day-1));
+          lines.push('BEGIN:VEVENT');
+          lines.push(`UID:${Date.now()}-${i}@3sib`);
+          lines.push(`DTSTAMP:${fmtDT(now,'00:00')}`);
+          lines.push(`DTSTART:${fmtDT(d,e.start)}`);
+          lines.push(`DTEND:${fmtDT(d,e.end)}`);
+          lines.push(`SUMMARY:${e.subject} — 3SIB`);
+          lines.push(`LOCATION:${e.room}`);
+          lines.push('END:VEVENT');
+        });
+        lines.push('END:VCALENDAR');
+        const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'}); const url=URL.createObjectURL(blob);
+        const a=document.createElement('a'); a.href=url; a.download='3SIB_emploi_du_temps.ics'; a.click(); URL.revokeObjectURL(url);
+      }
+
+      // ======= État & listeners =======
+      let stateWeekStart = mondayOf(new Date());
+      setWeekPickerFrom(stateWeekStart);
+      buildGrid(stateWeekStart);
+      renderWeek(stateWeekStart);
+      setInterval(()=>drawNowLineIfCurrent(stateWeekStart), 60*1000);
+
+      prevWeekBtn.addEventListener('click', ()=>{ stateWeekStart.setDate(stateWeekStart.getDate()-7); buildGrid(stateWeekStart); renderWeek(stateWeekStart); setWeekPickerFrom(stateWeekStart); });
+      nextWeekBtn.addEventListener('click', ()=>{ stateWeekStart.setDate(stateWeekStart.getDate()+7); buildGrid(stateWeekStart); renderWeek(stateWeekStart); setWeekPickerFrom(stateWeekStart); });
+      todayBtn.addEventListener('click', ()=>{ stateWeekStart = mondayOf(new Date()); buildGrid(stateWeekStart); renderWeek(stateWeekStart); setWeekPickerFrom(stateWeekStart); });
+      weekPicker.addEventListener('change', ()=>{ stateWeekStart = mondayFromWeekInput(); buildGrid(stateWeekStart); renderWeek(stateWeekStart); });
+      exportBtn.addEventListener('click', ()=> exportICS(stateWeekStart));
+
+      // ======= Self-tests (console) =======
+      (function tests(){
+        const T=[]; const ok=(n,c)=>T.push({n,ok:!!c});
+        ok('Grille présente', !!grid);
+        ok('5 colonnes jour', document.querySelectorAll('#timetableGrid .day-col').length===5);
+        ok('Boutons nav présents', !!prevWeekBtn && !!nextWeekBtn && !!todayBtn);
+        ok('Week picker présent', !!weekPicker && !!weekPicker.value);
+        ok('Au moins 1 event rendu', document.querySelectorAll('#timetableGrid .event').length>=1);
+        console.group('%cTests Emploi du temps (nav)','color:#10b981;font-weight:bold');
+        T.forEach(t=> console[t.ok?'log':'error'](`${t.ok?'✔':'✘'} ${t.n}`));
+        console.groupEnd();
+      })();
+    });
+    </script>
+  </body>
+</html>
