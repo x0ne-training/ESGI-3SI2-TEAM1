@@ -14,6 +14,10 @@
         // "lib": ["esnext"],
         // "types": ["node"],
         // and npm install -D @types/node
+        "baseUrl": "./resources/",
+        "paths": {
+            "@/*": ["*"]
+        },
 
         // Other Outputs
         "sourceMap": true,
@@ -39,8 +43,9 @@
         "isolatedModules": true,
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
+        "moduleResolution": "bundler",
         "skipLibCheck": true,
         "allowSyntheticDefaultImports": true
     },
-    "include": ["resources/js"]
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts"]
 }
