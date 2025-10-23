@@ -184,7 +184,7 @@
 
         <!-- Retour à l'accueil -->
         <div class="text-center mt-6">
-            <a href="{{ route('welcome') }}" class="text-custom-purple-light hover:text-custom-purple-light/80 transition-colors">
+            <a href="{{ route('app') }}" class="text-custom-purple-light hover:text-custom-purple-light/80 transition-colors">
                 ← Retour à l'accueil
             </a>
         </div>
