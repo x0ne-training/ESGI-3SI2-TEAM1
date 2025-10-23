@@ -92,6 +92,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('welcome')->with('success', 'Votre compte a été supprimé avec succès.');
+        return redirect()->route('app')->with('success', 'Votre compte a été supprimé avec succès.');
     }
 }
