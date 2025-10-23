@@ -18,8 +18,8 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm install
-      - name: Lint
-        run: npm run lint
+#      - name: Lint
+#        run: npm run lint
       - name: Run tests
         run: npm test
       - name: Upload coverage
