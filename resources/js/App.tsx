@@ -1,5 +1,5 @@
 import React from "react";
-import "@/css/app.css";
+import "@/css/index.css";
 
 const App = () => {
     return <div>Hello From React</div>;
