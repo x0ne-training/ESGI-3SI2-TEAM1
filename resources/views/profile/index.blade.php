@@ -155,7 +155,7 @@
                 <p class="text-custom-purple-light opacity-90">Gérez vos informations personnelles</p>
             </div>
             <div class="flex gap-4">
-                <a href="{{ route('welcome') }}" class="bg-white/10 px-4 py-2 rounded-xl border border-custom-purple-light/30 hover:bg-custom-purple-light/20 transition-all duration-300">
+                <a href="{{ route('app') }}" class="bg-white/10 px-4 py-2 rounded-xl border border-custom-purple-light/30 hover:bg-custom-purple-light/20 transition-all duration-300">
                     🏠 Accueil
                 </a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -393,10 +393,10 @@
                         Actions rapides
                     </h3>
                     <div class="space-y-3">
-                        <a href="{{ route('welcome') }}" class="block w-full bg-white/10 hover:bg-custom-purple-light/20 rounded-xl p-3 text-center transition-all duration-300">
+                        <a href="{{ route('app') }}" class="block w-full bg-white/10 hover:bg-custom-purple-light/20 rounded-xl p-3 text-center transition-all duration-300">
                             📅 Voir le planning
                         </a>
-                        <a href="{{ route('welcome') }}" class="block w-full bg-white/10 hover:bg-custom-purple-light/20 rounded-xl p-3 text-center transition-all duration-300">
+                        <a href="{{ route('app') }}" class="block w-full bg-white/10 hover:bg-custom-purple-light/20 rounded-xl p-3 text-center transition-all duration-300">
                             📝 Mes notes
                         </a>
                         <button class="block w-full bg-red-500/20 hover:bg-red-500/30 rounded-xl p-3 text-center transition-all duration-300">
