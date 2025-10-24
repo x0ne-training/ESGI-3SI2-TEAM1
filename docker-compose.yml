@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+app:
+build: .
+volumes:
+- ./:/app
+- ./vendor:/app/vendor
+- ./node_modules:/app/node_modules
+ports:
+- "9000:9000"
+depends_on:
+- mysql
+environment:
+APP_ENV: local
+DB_HOST: mysql
+DB_DATABASE: laravel
+DB_USERNAME: laravel
+DB_PASSWORD: secret
+
+
+nginx:
+image: nginx:alpine
+ports:
+- "8080:80"
+volumes:
+- ./:/app:ro
+- ./nginx/conf.d:/etc/nginx/conf.d:ro
+depends_on:
+- app
+
+
+mysql:
+image: mysql:8.0
+restart: unless-stopped
+environment:
+MYSQL_ROOT_PASSWORD: root
+MYSQL_DATABASE: laravel
+MYSQL_USER: laravel
+MYSQL_PASSWORD: secret
+ports:
+- "33060:3306"
+volumes:
+- dbdata:/var/lib/mysql
+
+
+redis:
+image: redis:alpine
+ports:
+- "6379:6379"
+
+
+volumes:
+dbdata:
