@@ -26,6 +26,6 @@ Bah y'a rien a résumer
 - MBAYE Ibrahima : Testeur
 - SAVIC César : Développeur
 - SILVA-RAOULT Loïc : Leader
-
+- OHIN-CODJOVI Kouassi Yves-Roland : Testeur
 --- 
 *© Tous droits réservés - 3SI2 promo 2025/2026*
