@@ -67,6 +67,20 @@ export default function Banner() {
                     </div>
                 ))}
             </div>
+
+            {/* Dot indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {slides.map((_, index) => (
+                    <span
+                        key={index}
+                        className={`h-2 w-2 rounded-full transition-colors duration-300 ${
+                            index === currentIndex
+                                ? "bg-white"
+                                : "bg-white/50"
+                        }`}
+                    />
+                ))}
+            </div>
         </div>
     );
 }
