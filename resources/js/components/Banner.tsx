@@ -38,11 +38,34 @@ export default function Banner() {
     return (
         <div className="relative w-full overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
             <div className="relative h-64 md:h-80">
-                <div className="absolute inset-0 flex h-full w-full items-center justify-center">
-                    <p className="text-white">
-                        Slide index : {currentIndex}
-                    </p>
-                </div>
+                {slides.map((slide, index) => (
+                    <div
+                        key={index}
+                        className={`absolute inset-0 transition-opacity duration-700 ${
+                            index === currentIndex
+                                ? "opacity-100"
+                                : "opacity-0"
+                        }`}
+                    >
+                        <img
+                            src={slide.image}
+                            alt={slide.title}
+                            className="h-full w-full object-cover"
+                        />
+
+                        <div className="absolute inset-0 bg-black/40 flex flex-col justify-center px-6 text-white">
+                            <h2 className="text-2xl font-bold md:text-3xl">
+                                {slide.title}
+                            </h2>
+
+                            {slide.subtitle && (
+                                <p className="mt-2 text-sm md:text-base text-white/80">
+                                    {slide.subtitle}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );
