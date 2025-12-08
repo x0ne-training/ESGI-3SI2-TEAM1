@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 interface Slide {
     image: string;
@@ -25,11 +25,23 @@ export default function Banner() {
         },
     ];
 
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % slides.length);
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [slides.length]);
+
     return (
         <div className="relative w-full overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
             <div className="relative h-64 md:h-80">
                 <div className="absolute inset-0 flex h-full w-full items-center justify-center">
-                    <p className="text-white">Banner placeholder</p>
+                    <p className="text-white">
+                        Slide index : {currentIndex}
+                    </p>
                 </div>
             </div>
         </div>
