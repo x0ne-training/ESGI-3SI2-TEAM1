@@ -79,3 +79,9 @@ Chaque Pull Request doit :
 - passer la CI
 - être revue avant merge
 
+
+## Release Process
+1. Pull Request develop vers main
+2. Validation CI
+3. Build et push de l'image Docker
+
