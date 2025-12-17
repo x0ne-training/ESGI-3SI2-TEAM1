@@ -121,3 +121,8 @@ La CI permet de :
 - garantir la qualité du code
 - sécuriser les merges vers main
 
+
+## CI Triggers
+- Push sur develop
+- Pull Request vers main
+
