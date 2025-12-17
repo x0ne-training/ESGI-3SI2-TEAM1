@@ -131,3 +131,10 @@ La CI permet de :
 - CI : tests et contrôles qualité
 - CD : build et déploiement Docker après merge sur main
 
+
+## Why Docker
+Docker permet :
+- un environnement reproductible
+- une isolation des services
+- un déploiement simplifié
+
