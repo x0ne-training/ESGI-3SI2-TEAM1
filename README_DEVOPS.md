@@ -33,3 +33,7 @@ Toutes les fonctionnalités et améliorations DevOps y sont développées.
 3. Pull Request vers develop
 4. Merge vers main après validation CI
 
+
+## CI/CD Overview
+Le projet utilise GitHub Actions pour automatiser les contrôles qualité et le déploiement.
+
