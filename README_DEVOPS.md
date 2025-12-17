@@ -145,3 +145,9 @@ Docker permet :
 3. Exécution de l'application
 4. Arrêt et suppression
 
+
+## CI Security
+- Secrets injectés dynamiquement
+- Aucun secret en clair dans le repo
+- Logs CI sans données sensibles
+
