@@ -66,3 +66,9 @@ Services utilisés en développement local :
 Les variables sensibles sont gérées via GitHub Secrets.
 Aucun fichier .env n'est versionné.
 
+
+## Security Best Practices
+- Secrets stockés dans GitHub Actions
+- Accès restreint à main
+- CI obligatoire avant merge
+
