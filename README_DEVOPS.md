@@ -157,3 +157,10 @@ Docker permet :
 - Permissions restreintes
 - Build multi-stage
 
+
+## Quality Gates
+Un merge vers main est autorisé uniquement si :
+- tests OK
+- analyse statique OK
+- style conforme
+
