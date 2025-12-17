@@ -61,3 +61,8 @@ Services utilisés en développement local :
 - nginx
 - redis
 
+
+## Environment Variables
+Les variables sensibles sont gérées via GitHub Secrets.
+Aucun fichier .env n'est versionné.
+
