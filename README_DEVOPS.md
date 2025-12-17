@@ -164,3 +164,7 @@ Un merge vers main est autorisé uniquement si :
 - analyse statique OK
 - style conforme
 
+
+## Technical Debt
+Les outils de CI permettent de limiter la dette technique en détectant les problèmes tôt.
+
