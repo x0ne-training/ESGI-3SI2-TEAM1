@@ -26,3 +26,10 @@ Toutes les fonctionnalités et améliorations DevOps y sont développées.
 - feature/* : développement de nouvelles fonctionnalités
 - hotfix/* : corrections urgentes
 
+
+## Developer Workflow
+1. Création d'une branche feature depuis develop
+2. Commits fréquents et ciblés
+3. Pull Request vers develop
+4. Merge vers main après validation CI
+
