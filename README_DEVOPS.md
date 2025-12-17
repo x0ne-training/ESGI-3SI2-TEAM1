@@ -53,3 +53,11 @@ Outils exécutés :
 Le projet est conteneurisé avec Docker.
 Un Dockerfile multi-stage est utilisé pour optimiser l'image finale.
 
+
+## docker-compose
+Services utilisés en développement local :
+- app (Laravel PHP)
+- mysql
+- nginx
+- redis
+
