@@ -126,3 +126,8 @@ La CI permet de :
 - Push sur develop
 - Pull Request vers main
 
+
+## CI vs CD
+- CI : tests et contrôles qualité
+- CD : build et déploiement Docker après merge sur main
+
