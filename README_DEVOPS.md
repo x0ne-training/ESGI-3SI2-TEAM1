@@ -72,3 +72,10 @@ Aucun fichier .env n'est versionné.
 - Accès restreint à main
 - CI obligatoire avant merge
 
+
+## Pull Requests
+Chaque Pull Request doit :
+- avoir une description claire
+- passer la CI
+- être revue avant merge
+
