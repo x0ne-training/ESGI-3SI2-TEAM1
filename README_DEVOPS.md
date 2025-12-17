@@ -91,3 +91,10 @@ Chaque Pull Request doit :
 - Analyse statique avec PHPStan
 - Style de code avec PHPCS
 
+
+## DevOps Checklist
+- CI fonctionnelle
+- Docker opérationnel
+- Branches protégées
+- Secrets sécurisés
+
