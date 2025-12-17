@@ -138,3 +138,10 @@ Docker permet :
 - une isolation des services
 - un déploiement simplifié
 
+
+## Container Lifecycle
+1. Build de l'image
+2. Lancement via docker-compose
+3. Exécution de l'application
+4. Arrêt et suppression
+
