@@ -19,3 +19,10 @@ Toutes les fonctionnalités et améliorations DevOps y sont développées.
 3. Validation CI obligatoire
 4. Merge après revue
 
+
+## GitFlow Strategy
+- main : branche stable (production)
+- develop : branche d'intégration continue
+- feature/* : développement de nouvelles fonctionnalités
+- hotfix/* : corrections urgentes
+
