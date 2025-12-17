@@ -172,3 +172,7 @@ Les outils de CI permettent de limiter la dette technique en détectant les prob
 ## DevOps Vision
 L'objectif est de rapprocher développement et exploitation via l'automatisation et la qualité continue.
 
+
+## Pull Request Template
+Un template de PR est utilisé pour standardiser les revues et améliorer la qualité des merges.
+
