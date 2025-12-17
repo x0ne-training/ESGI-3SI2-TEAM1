@@ -85,3 +85,9 @@ Chaque Pull Request doit :
 2. Validation CI
 3. Build et push de l'image Docker
 
+
+## Code Quality
+- Tests automatisés avec PHPUnit
+- Analyse statique avec PHPStan
+- Style de code avec PHPCS
+
