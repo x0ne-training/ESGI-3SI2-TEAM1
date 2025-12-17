@@ -114,3 +114,10 @@ Exemples :
 - Revue obligatoire avant merge
 - Pas de squash pour garder l'historique
 
+
+## CI Purpose
+La CI permet de :
+- détecter les erreurs tôt
+- garantir la qualité du code
+- sécuriser les merges vers main
+
