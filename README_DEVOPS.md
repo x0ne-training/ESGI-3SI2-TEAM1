@@ -11,3 +11,11 @@ Les changements passent obligatoirement par des Pull Requests depuis .
 La branche  est utilisée pour l'intégration continue.
 Toutes les fonctionnalités et améliorations DevOps y sont développées.
 
+
+## Pull Request Workflow
+
+1. Développement sur 
+2. Ouverture d'une PR vers 
+3. Validation CI obligatoire
+4. Merge après revue
+
