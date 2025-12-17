@@ -168,3 +168,7 @@ Un merge vers main est autorisé uniquement si :
 ## Technical Debt
 Les outils de CI permettent de limiter la dette technique en détectant les problèmes tôt.
 
+
+## DevOps Vision
+L'objectif est de rapprocher développement et exploitation via l'automatisation et la qualité continue.
+
