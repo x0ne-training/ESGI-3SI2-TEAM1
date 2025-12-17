@@ -98,3 +98,13 @@ Chaque Pull Request doit :
 - Branches protégées
 - Secrets sécurisés
 
+
+## Commit Message Convention
+Format utilisé :
+type(scope): description
+
+Exemples :
+- docs(devops): update documentation
+- ci: improve pipeline
+- chore(docker): optimize build
+
