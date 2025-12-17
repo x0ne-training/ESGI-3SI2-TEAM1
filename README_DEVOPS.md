@@ -48,3 +48,8 @@ Outils exécutés :
 - PHPStan
 - PHPCS
 
+
+## Docker
+Le projet est conteneurisé avec Docker.
+Un Dockerfile multi-stage est utilisé pour optimiser l'image finale.
+
