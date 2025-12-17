@@ -151,3 +151,9 @@ Docker permet :
 - Aucun secret en clair dans le repo
 - Logs CI sans données sensibles
 
+
+## Docker Security
+- Image PHP officielle
+- Permissions restreintes
+- Build multi-stage
+
