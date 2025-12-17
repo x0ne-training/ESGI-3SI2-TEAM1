@@ -108,3 +108,9 @@ Exemples :
 - ci: improve pipeline
 - chore(docker): optimize build
 
+
+## Merge Rules
+- Aucun merge sans CI verte
+- Revue obligatoire avant merge
+- Pas de squash pour garder l'historique
+
