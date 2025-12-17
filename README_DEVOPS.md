@@ -37,3 +37,14 @@ Toutes les fonctionnalités et améliorations DevOps y sont développées.
 ## CI/CD Overview
 Le projet utilise GitHub Actions pour automatiser les contrôles qualité et le déploiement.
 
+
+## Continuous Integration
+La CI est déclenchée :
+- sur chaque push vers develop
+- sur chaque Pull Request vers main
+
+Outils exécutés :
+- PHPUnit
+- PHPStan
+- PHPCS
+
