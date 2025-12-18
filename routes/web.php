@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\AbsenceController;
+use App\Http\Controllers\ContactController;
 
 // Page d'accueil
 Route::get('/', function () {
@@ -31,4 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/notes', [NotesController::class, 'index'])->name('notes.index');
     Route::get('/absences', [AbsenceController::class, 'index'])->name('absences.index');
     Route::post('/absences', [AbsenceController::class, 'store'])->name('absences.store');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 });
